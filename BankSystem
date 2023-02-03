@@ -1,0 +1,100 @@
+class BankAccount {
+  private String accountNumber;
+  private double balance;
+
+  public BankAccount(String accountNumber, double balance) {
+    this.accountNumber = accountNumber;
+    this.balance = balance;
+  }
+
+  public String getAccountNumber() {
+    return accountNumber;
+  }
+
+  public double getBalance() {
+    return balance;
+  }
+
+  public void deposit(double amount) {
+    balance += amount;
+  }
+
+  public void withdraw(double amount) {
+    balance -= amount;
+  }
+}
+
+class SavingsAccount extends BankAccount {
+  private double interestRate;
+
+  public SavingsAccount(String accountNumber, double balance, double interestRate) {
+    super(accountNumber, balance);
+    this.interestRate = interestRate;
+  }
+
+  public double getInterestRate() {
+    return interestRate;
+  }
+
+  public void addInterest() {
+    double interest = getBalance() * interestRate / 100;
+    deposit(interest);
+  }
+}
+
+class CurrentAccount extends BankAccount {
+  private double overdraftLimit;
+
+  public CurrentAccount(String accountNumber, double balance, double overdraftLimit) {
+    super(accountNumber, balance);
+    this.overdraftLimit = overdraftLimit;
+  }
+
+  public double getOverdraftLimit() {
+    return overdraftLimit;
+  }
+
+  @Override
+  public void withdraw(double amount) {
+    if (amount > getBalance() + overdraftLimit) {
+      System.out.println("Transaction declined: insufficient funds.");
+    } else {
+      super.withdraw(amount);
+    }
+  }
+}
+
+class Bank {
+  private List<BankAccount> accounts;
+
+  public Bank() {
+    accounts = new ArrayList<>();
+  }
+
+  public void addAccount(BankAccount account) {
+    accounts.add(account);
+  }
+
+  public BankAccount findAccount(String accountNumber) {
+    for (BankAccount account : accounts) {
+      if (account.getAccountNumber().equals(accountNumber)) {
+        return account;
+      }
+    }
+    return null;
+  }
+
+  public void deposit(String accountNumber, double amount) {
+    BankAccount account = findAccount(accountNumber);
+    if (account != null) {
+      account.deposit(amount);
+    }
+  }
+
+  public void withdraw(String accountNumber, double amount) {
+    BankAccount account = findAccount(accountNumber);
+    if (account != null) {
+      account.withdraw(amount);
+    }
+  }
+}
