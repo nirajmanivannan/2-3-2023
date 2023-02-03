@@ -1,0 +1,6 @@
+This Java code demonstrates a straightforward implementation of a bank system and consists of the following classes:
+BankAccount: This is the fundamental class that represents a bank account and includes all of its operations, including deposits and withdrawals. AccountNumber and balance are two instance variables with associated getter methods.
+SavingsAccount: This class, which represents a savings account, extends the BankAccount class. It also contains a getter function for the extra instance variable interestRate. Additionally, it contains a method called addInterest that computes and deposits interest on the balance.
+CurrentAccount: This class, which represents a current account, extends the BankAccount class as well. It also contains a getter function and an extra instance variable called overdraftLimit. This class's withdraw method has been modified to determine whether the requested amount exceeds the balance + the overdraft limit and to reject the transaction if it does.
+A list of BankAccount objects may be found in the class Bank, which represents a bank. It offers ways to add accounts, locate accounts using account numbers, deposit money into accounts, and withdraw money from accounts.
+Each class uses polymorphism, encapsulation, and inheritance in accordance with the principles of object-oriented programming.
